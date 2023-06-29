@@ -1,0 +1,9 @@
+IDR:
+  years:
+    ret_sales: 2022
+    eav: 2021
+CPI:
+  years:
+  - 2012
+  - 2022
+  adj_value: 1.2730267
