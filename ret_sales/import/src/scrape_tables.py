@@ -21,12 +21,12 @@ import yaml
 
 path_proj = os.path.realpath('./')
 
-with open(path_proj + r'/ingest_data/config.yaml', 'r') as file:
+with open(path_proj + r'/config.yaml', 'r') as file:
     ingest_config = yaml.safe_load(file)
 
 MUNI_CNTY_GOV_FIELD = '0000000'
 year = ingest_config['IDR']['years']['ret_sales']
-report_period_field = ['{}{}'.format(year, i) for i in [0,1,2,3,4]] # 0 is calendar year, quarters are 1 - 4; for example Q1 2021 is '20211'
+report_period_field = ['{}{}'.format(y, i) for y in year for i in [0,1,2,3,4]] # 0 is calendar year, quarters are 1 - 4; for example Q1 2021 is '20211'
 TAX_TYPE_FIELD = '00'
 county_name_field = {
     'Cook': '016',
