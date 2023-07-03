@@ -1,18 +1,17 @@
-# %%
 import pandas as pd
 import os
 import yaml
 
 path_proj = os.path.realpath('./')
 
-with open(path_proj + r'/ingest_data/config.yaml', 'r') as file:
+with open(path_proj + r'/config.yaml', 'r') as file:
     ingest_config = yaml.safe_load(file)
 
 ret_sales_year = ingest_config['IDR']['years']['ret_sales']
 eav_year = ingest_config['IDR']['years']['eav']
 
-eav_path = path_proj + r'\ingest_data\idr\eav\output\eav_data.csv'
-ret_sales_path = path_proj + r'\ingest_data\idr\ret_sales\transform\output\transformed_data.csv'
+eav_path = path_proj + r'\eav\output\eav_data.csv'
+ret_sales_path = path_proj + r'\ret_sales\transform\output\transformed_data.csv'
 
 eav_data = pd.read_csv(eav_path)
 ret_sales_data = pd.read_csv(ret_sales_path)
@@ -60,5 +59,5 @@ geog_rename = {
     }
 export_table.index = export_table.index.map(lambda val: geog_rename[val] if val in geog_rename else val)
 
-export_path = path_proj + r'\ingest_data\idr\export\output\IDR_{}_{}.csv'.format(eav_year, ret_sales_year)
+export_path = path_proj + r'\export\output\IDR_{}_{}.csv'.format(eav_year, ret_sales_year)
 export_table.to_csv(export_path)

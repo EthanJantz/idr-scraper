@@ -1,23 +1,9 @@
-## ---------------------------
-## Project name: IDR Retail Sales Tax Scraper
-## Script name: transform.py
-##
-## Purpose of script:This script applies calculations to data from /scrape_tables/output to output municipal-level retail sales taxable revenue
-##
-## Author: Ethan Jantz
-##
-## Date Created: 2023-05-12
-##
-## Email: ejantz@cmap.illinois.gov
-##
-## ---------------------------
-
 import os
 import pandas as pd
 
 project_path = os.path.realpath('./') # /community-data-snapshots
 
-scraped_data = pd.read_csv(project_path + r'\ingest_data\idr\ret_sales\import\output\scraped_data.csv')
+scraped_data = pd.read_csv(project_path + r'\ret_sales\import\output\scraped_data.csv')
 
 # Combine ct and mt columns
 scraped_data['mt_ct_combined'] = scraped_data['mt'].fillna(scraped_data['ct'])
@@ -66,5 +52,5 @@ export_data.index.rename('MUNI', inplace = True)
 export_data = export_data.rename(columns = {'st_rev': 'GEN_MERCH', 'mt_ct_rev': 'RET_SALES'})
 
 # Export
-export_path = project_path + r'\ingest_data\idr\ret_sales\transform\output\transformed_data.csv'
+export_path = project_path + r'\ret_sales\transform\output\transformed_data.csv'
 export_data.to_csv(export_path)
