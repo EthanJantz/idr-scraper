@@ -1,6 +1,10 @@
 IDR:
   years:
-    ret_sales: 2022
+    ret_sales: 
+    - 2022
+    - 2021
+    - 2020
+    - 2019
     eav: 2021
 CPI:
   years:
