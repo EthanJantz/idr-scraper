@@ -1,17 +1,16 @@
-
 import pandas as pd
 import os
 import yaml
 
 path_proj = os.path.realpath('./')
 
-with open(path_proj + r'/ingest_data/config.yaml', 'r') as file:
+with open(path_proj + r'/config.yaml', 'r') as file:
     ingest_config = yaml.safe_load(file)
 
 ret_sales_year = ingest_config['IDR']['years']['ret_sales']
 eav_year = ingest_config['IDR']['years']['eav']
 
-ret_sales_path = path_proj + r'\ingest_data\idr\ret_sales\transform\output\transformed_data.csv'
+ret_sales_path = path_proj + r'\ret_sales\transform\output\transformed_data.csv'
 ret_sales = pd.read_csv(ret_sales_path)
 ret_sales = ret_sales[ret_sales['year'] == ret_sales_year]
 
@@ -89,5 +88,5 @@ eav_muni_data.drop(['district_id', 'year'], axis = 1, inplace = True)
 eav_muni_summed = eav_muni_data.groupby(['MUNI']).sum().reset_index()
 
 
-export_path = path_proj + r'\ingest_data\idr\eav\output\eav_data.csv'
+export_path = path_proj + r'\eav\output\eav_data.csv'
 eav_muni_summed.to_csv(export_path, index = False)

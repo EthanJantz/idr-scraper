@@ -1,17 +1,3 @@
-## ---------------------------
-## Project name: IDR Retail Sales Tax Scraper
-## Script name: scrape_tables.py.R
-##
-## Purpose of script:This script scrapes municipal and state revenue shares on sales tax for all CMAP municipalities
-##
-## Author: Ethan Jantz
-##
-## Date Created: 2023-01-19
-##
-## Email: ejantz@cmap.illinois.gov
-##
-## ---------------------------
-
 from bs4 import BeautifulSoup
 import requests
 import pandas as pd
@@ -21,7 +7,7 @@ import yaml
 
 path_proj = os.path.realpath('./')
 
-with open(path_proj + r'/ingest_data/config.yaml', 'r') as file:
+with open(path_proj + r'/config.yaml', 'r') as file:
     ingest_config = yaml.safe_load(file)
 
 MUNI_CNTY_GOV_FIELD = '0000000'
@@ -129,7 +115,7 @@ for county, period in product(county_name_field, report_period_field):
         ct_out = [''] * 11
         # time.sleep(2)
 
-export_path = path_proj + r'\ingest_data\idr\ret_sales\import\output\scraped_data.csv'
+export_path = path_proj + r'\ret_sales\import\output\scraped_data.csv'
 out_table.to_csv(export_path, index = False)
 
 # # Testing case, Lake county
